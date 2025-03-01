@@ -386,28 +386,26 @@
                   People worldwide use language in subtle and complex ways to express emotions. While emotion recognition -- an umbrella term for several NLP tasks -- significantly impacts different applications in NLP and other fields, most work in the area is focused on high-resource languages. Therefore, this has led to major disparities in research and proposed solutions, especially for low-resource languages that suffer from the lack of high-quality datasets.
                   In this paper, we present \datasetname~-- a collection of multilabeled emotion-annotated datasets in 28 different languages. \datasetname~covers predominantly low-resource languages from Africa, Asia, Eastern Europe, and Latin America, with instances from various domains annotated by fluent speakers. We describe the data collection and annotation processes and the challenges of building these datasets. Then, we report different experimental results for monolingual and crosslingual multi-label emotion identification, as well as intensity-level emotion recognition. We investigate results with and without using LLMs and analyse the large variability in performance across languages and text domains. We show that \datasetname~datasets are a step towards bridging the gap in text-based emotion recognition and discuss their impact and utility.
                 </p> -->
-            <p>We introduce <strong><i>BRIGHTER</i></strong>: a novel, multilingual, and culturally diverse emotion
-              recognition
-              benchmark that focuses on low-resource languages, many of which are underrepresented and understudied in
-              NLP.</p>
+            <p>We introduce <strong><i>BRIGHTER</i></strong>: a new emotion
+              recognition dataset collection in 28 languages that originate from 7 distinct language families. Many of these languages are considered low-resource, and are mainly spoken in regions characterised by a limited availability of NLP resources (e.g., Africa, Asia, Latin America).</p>
             
             <p>Our contribuitions:</p>
             <ul>
               <li><strong>A linguistically diverse multilingual dataset</strong>:
-                <i>BRIGHTER</i> consists of nearly 100k emotion-annotated instances across 28 languages, predominantly
+                <i>BRIGHTER</i> consists of nearly 100k emotion-annotated instances in 28 languages, predominantly
                 from
                 Africa, Asia, Eastern Europe, and Latin America. The dataset spans 7 language families and covers a
                 variety
                 of
                 domains, including social media, speeches, news, literature, and reviews. Each instance is multi-labeled
                 with six
-                emotion classes — <strong>joy, sadness, anger, fear, surprise, disgust</strong>, and <strong>Neutral</strong>
+                emotion classes — <strong>joy, sadness, anger, fear, surprise, disgust</strong>, and <strong>neutral</strong>
                 —
                 and
-                annotated with four intensity levels, ranging from 0 to 3.
+                annotated within four emotion intensity levels, ranging from 0 to 3.
               </li>
               <li>
-                <strong>Baseline Evaluation</strong>:We provide an initial set of monolingual and crosslingual
+                <strong>Baseline Evaluation</strong>: We provide an initial set of monolingual and crosslingual
                 experiments, benchmarking Large Language Models
                 (LLMs) for
                 multi-label emotion identification and intensity prediction. Our results highlight the performance
@@ -420,7 +418,7 @@
           </div>
   
           <h3 class="title is-3">Statistics</h3>
-          <p>Below is the statistic of our data.</p>
+          <p>Below are the statistics of our dataset collection:</p>
           <img 
             src="static/images/distribution_v5.png" 
             alt="MY ALT TEXT"
@@ -438,7 +436,7 @@
           </div>
           </div>
 
-          <h3 class="title is-3">Experiment Results</h3>
+          <h3 class="title is-3">Experimental Results</h3>
           <div class="content has-text-centered">
             <p>Comparing models' performance across languages when prompted in English (orange) vs. when prompted in the target language (blue). LLMs perform better when prompted in English.</p>
             <img src="static/images/radar_chart_updated.png" width="500px" alt="MY ALT TEXT" />
