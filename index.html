@@ -557,8 +557,54 @@
   </section>-->
   <!--End paper poster -->
 
+<!-- BibTeX Citation Section -->
+<section class="section" id="BibTeX">
+  <div class="container is-max-desktop content">
+      <h2 class="title">BibTeX</h2>
+      <button class="button is-primary" onclick="copyBibTeX()">Copy BibTeX</button>
+      <pre id="bibtex-content"><code>
+@misc{muhammad2025brighterbridginggaphumanannotated,
+  title={BRIGHTER: BRIdging the Gap in Human-Annotated Textual Emotion Recognition Datasets for 28 Languages}, 
+  author={Shamsuddeen Hassan Muhammad and Nedjma Ousidhoum and Idris Abdulmumin and Jan Philip Wahle and Terry Ruas and Meriem Beloucif and Christine de Kock and Nirmal Surange and Daniela Teodorescu and Ibrahim Said Ahmad and David Ifeoluwa Adelani and Alham Fikri Aji and Felermino D. M. A. Ali and Ilseyar Alimova and Vladimir Araujo and Nikolay Babakov and Naomi Baes and Ana-Maria Bucur and Andiswa Bukula and Guanqun Cao and Rodrigo Tufino Cardenas and Rendi Chevi and Chiamaka Ijeoma Chukwuneke and Alexandra Ciobotaru and Daryna Dementieva and Murja Sani Gadanya and Robert Geislinger and Bela Gipp and Oumaima Hourrane and Oana Ignat and Falalu Ibrahim Lawan and Rooweither Mabuya and Rahmad Mahendra and Vukosi Marivate and Andrew Piper and Alexander Panchenko and Charles Henrique Porto Ferreira and Vitaly Protasov and Samuel Rutunda and Manish Shrivastava and Aura Cristina Udrea and Lilian Diana Awuor Wanzare and Sophie Wu and Florian Valentin Wunderlich and Hanif Muhammad Zhafran and Tianhui Zhang and Yi Zhou and Saif M. Mohammad},
+  year={2025},
+  eprint={2502.11926},
+  archivePrefix={arXiv},
+  primaryClass={cs.CL},
+  url={https://arxiv.org/abs/2502.11926}
+}
 
-  <!--BibTex citation -->
+@inproceedings{muhammad-etal-2025-semeval,
+  title = "{S}em{E}val Task 11: Bridging the Gap in Text-Based Emotion Detection",
+  author = "Muhammad, Shamsuddeen Hassan and Ousidhoum, Nedjma and Abdulmumin, Idris and Yimam, Seid Muhie and Wahle, Jan Philip and Ruas, Terry and Beloucif, Meriem and De Kock, Christine and Belay, Tadesse Destaw and Ahmad, Ibrahim Said and Surange, Nirmal and Teodorescu, Daniela and Adelani, David Ifeoluwa and Aji, Alham Fikri and Ali, Felermino and Araujo, Vladimir and Ayele, Abinew Ali and Ignat, Oana and Panchenko, Alexander and Zhou, Yi and Mohammad, Saif M.",
+  booktitle = "Proceedings of the 19th International Workshop on Semantic Evaluation (SemEval-2025)",
+  month = july,
+  year = "2025",
+  address = "Vienna, Austria",
+  publisher = "Association for Computational Linguistics",
+  url = "",
+  doi = "",
+  pages = ""
+}
+      </code></pre>
+  </div>
+</section>
+
+<!-- JavaScript for Copying BibTeX -->
+<script>
+function copyBibTeX() {
+  var bibtexContent = document.getElementById("bibtex-content").innerText;
+  navigator.clipboard.writeText(bibtexContent).then(function() {
+      alert("BibTeX copied to clipboard!");
+  }, function(err) {
+      console.error("Could not copy text: ", err);
+  });
+}
+</script>
+
+
+
+
+  <!-- BibTex citation -->
   <section class="section" id="BibTeX">
     <div class="container is-max-desktop content">
       <h2 class="title">BibTeX</h2>
