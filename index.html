@@ -547,56 +547,55 @@ class PDFViewer {
         });
     }
     
-    renderPage(num) {
-        if (!this.pdfDoc) return;
+    renderPage = (num) => {
+      pdfDoc.getPage(num).then((page) => {
+        // Get the current container dimensions
+        const containerWidth = canvas.parentElement.clientWidth;
+        const containerHeight = canvas.parentElement.clientHeight;
         
-        this.pdfDoc.getPage(num).then((page) => {
-            // Get the current container dimensions
-            const containerWidth = this.pdfFrame.clientWidth;
-            const containerHeight = this.pdfFrame.clientHeight;
-            
-            // Get original page dimensions
-            const originalViewport = page.getViewport({ scale: 1.0 });
-            
-            // Calculate scale to fill the entire container (stretch to fit)
-            const scaleX = containerWidth / originalViewport.width;
-            const scaleY = containerHeight / originalViewport.height;
-            
-            // Use the larger scale to fill completely (may crop content)
-            // Or use smaller scale to fit completely (may leave empty space)
-            // For NO empty space, we use the larger scale
-            const baseScale = Math.max(scaleX, scaleY);
-            const finalScale = baseScale * this.zoom;
-            
-            // Get viewport with calculated scale
-            const viewport = page.getViewport({ scale: finalScale });
-            
-            // Set canvas to exactly match the container size
-            this.canvas.width = containerWidth;
-            this.canvas.height = containerHeight;
-            this.canvas.style.width = `${containerWidth}px`;
-            this.canvas.style.height = `${containerHeight}px`;
-            
-            // Clear the canvas
-            this.ctx.clearRect(0, 0, containerWidth, containerHeight);
-            
-            // Calculate centering offsets (for when content is larger than container)
-            const offsetX = (containerWidth - viewport.width) / 2;
-            const offsetY = (containerHeight - viewport.height) / 2;
-            
-            // Create a new viewport for rendering with offset
-            const renderContext = {
-                canvasContext: this.ctx,
-                viewport: viewport,
-                transform: [1, 0, 0, 1, offsetX, offsetY] // Translation matrix for centering
-            };
-            
-            page.render(renderContext).promise.then(() => {
-                this.pageInfo.textContent = `Page ${this.currentPage} of ${this.pdfDoc.numPages}`;
-                this.updateButtonStates();
-            });
+        // Get original page dimensions
+        const originalViewport = page.getViewport({ scale: 1.0 });
+        
+        // Calculate scale to fit the entire page without cropping
+        const scaleX = containerWidth / originalViewport.width;
+        const scaleY = containerHeight / originalViewport.height;
+        
+        // Use the smaller scale to fit the entire page (no cropping)
+        const baseScale = Math.min(scaleX, scaleY);
+        
+        // Apply additional reduction equivalent to two zoom-outs (0.2 * 2 = 0.4)
+        const adjustedBaseScale = baseScale * 0.6; // This gives you 2 zoom-outs worth of space
+        
+        const finalScale = adjustedBaseScale * zoom;
+        
+        // Get viewport with calculated scale
+        const viewport = page.getViewport({ scale: finalScale });
+        
+        // Set canvas to exactly match the container size
+        canvas.width = containerWidth;
+        canvas.height = containerHeight;
+        canvas.style.width = `${containerWidth}px`;
+        canvas.style.height = `${containerHeight}px`;
+        
+        // Clear the canvas
+        ctx.clearRect(0, 0, containerWidth, containerHeight);
+        
+        // Calculate centering offsets
+        const offsetX = (containerWidth - viewport.width) / 2;
+        const offsetY = (containerHeight - viewport.height) / 2;
+        
+        // Create a new viewport for rendering with offset
+        const renderContext = {
+          canvasContext: ctx,
+          viewport: viewport,
+          transform: [1, 0, 0, 1, offsetX, offsetY] // Translation matrix for centering
+        };
+        
+        page.render(renderContext).then(() => {
+          pageInfo.textContent = `Page ${currentPage} of ${pdfDoc.numPages}`;
         });
-    }
+      });
+    };
     
     updateButtonStates() {
         this.prevBtn.disabled = this.currentPage <= 1;
@@ -721,16 +720,12 @@ document.addEventListener('DOMContentLoaded', function () {
 }
 
 .pdf-frame {
-    width: 100%;
-    height: 70vh;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    overflow: hidden;
-    background: white;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
+  width: 100%;
+  height: 70vh;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  overflow: hidden;
+  background: white;
 }
 
 .pdf-help {
@@ -757,7 +752,6 @@ document.addEventListener('DOMContentLoaded', function () {
     background: white;
     border: 1px solid #ddd;
     border-radius: 8px;
-    /* Remove max-width and max-height to allow exact sizing */
 }
 
 /* Responsive adjustments */
