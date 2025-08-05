@@ -25,6 +25,7 @@
   <script src="static/js/bulma-carousel.min.js"></script>
   <script src="static/js/bulma-slider.min.js"></script>
   <script src="static/js/index.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.10.111/pdf.min.js"></script>
 
   <style>
     table {
@@ -451,133 +452,104 @@
     </div>
   </section>
 
-  <section class="section" id="Slides">
-    <div class="container is-max-desktop content">
-      <h3 class="title is-3">Brighter SemEval Task 11 Slides</h3>
+  <section class="section hero">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+        <div class="column">
+          <h3 class="title is-3">Brighter SemEval Task 11 Slides</h3>
           <div class="pdf-viewer-container">
             <div class="pdf-controls">
-              <button id="prevSlide" class="button is-small">
-                <span class="icon">
-                  <i class="fas fa-chevron-left"></i>
-                </span>
-                <span>Previous</span>
-              </button>
-              
-              <span id="pageInfo">
-                Page 1 of 14
-              </span>
-              
-              <button id="nextSlide" class="button is-small">
-                <span>Next</span>
-                <span class="icon">
-                  <i class="fas fa-chevron-right"></i>
-                </span>
-              </button>
+              <button id="prevSlide" class="button is-small">Previous</button>
+              <span id="pageInfo">Page 1 of ?</span>
+              <button id="nextSlide" class="button is-small">Next</button>
+              <button id="zoomIn" class="button is-small">Zoom In</button>
+              <button id="zoomOut" class="button is-small">Zoom Out</button>
             </div>
 
             <div class="pdf-frame">
-              <iframe 
-                id="pdfViewer" 
-                src="static/pdfs/SemEval2025-task11-slides.pdf#page=1&view=Fit&toolbar=0&navpanes=0&scrollbar=0" 
-                width="100%" 
-                height="100%">
-                <p>Your browser does not support PDFs. 
-                  <a href="static/pdfs/SemEval2025-task11-slides.pdf" target="_blank">Download the PDF</a> to view it.
-                </p>
-              </iframe>
+              <canvas id="pdfCanvas"></canvas>
             </div>
 
             <div class="pdf-help">
-              <small>
-                Use arrow keys (← → ↑ ↓) or the buttons above to navigate slides
-              </small>
+              <small>Use arrow keys (← →) or buttons above to navigate</small>
             </div>
           </div>
+        </div>
+      </div>
     </div>
   </section>
 
 <script>
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
+  const url = 'static/pdfs/SemEval2025-task11-slides.pdf'; // PDF path
+
+  let pdfDoc = null;
   let currentPage = 1;
-  const totalPages = 14; // Set to actual number of slides
-  
-  const pdfViewer = document.getElementById('pdfViewer');
+  let zoom = 1.0;
+
+  const canvas = document.getElementById('pdfCanvas');
+  const ctx = canvas.getContext('2d');
   const pageInfo = document.getElementById('pageInfo');
-  const prevBtn = document.getElementById('prevSlide');
-  const nextBtn = document.getElementById('nextSlide');
 
-  // Function to update the PDF page
-  function updatePage(pageNum) {
-    // Ensure page number is within bounds
-    if (pageNum < 1) pageNum = 1;
-    if (pageNum > totalPages) pageNum = totalPages;
-    
-    currentPage = pageNum;
-    
-    // Update iframe source with new page - using Fit view to fit entire page in window
-    pdfViewer.src = `static/pdfs/SemEval2025-task11-slides.pdf#page=${currentPage}&view=Fit&toolbar=0&navpanes=0&scrollbar=0&zoom=page-fit`;
-    
-    // Update page info display
-    pageInfo.textContent = `Page ${currentPage} of ${totalPages}`;
-    
-    // Update button states
-    prevBtn.disabled = currentPage <= 1;
-    nextBtn.disabled = currentPage >= totalPages;
-    
-    // Add visual feedback for button states
-    if (currentPage <= 1) {
-      prevBtn.classList.add('is-disabled');
-    } else {
-      prevBtn.classList.remove('is-disabled');
-    }
-    
-    if (currentPage >= totalPages) {
-      nextBtn.classList.add('is-disabled');
-    } else {
-      nextBtn.classList.remove('is-disabled');
-    }
-  }
+  const renderPage = (num) => {
+    pdfDoc.getPage(num).then((page) => {
+      const viewport = page.getViewport({ scale: zoom });
+      canvas.height = viewport.height;
+      canvas.width = viewport.width;
 
-  // Button event listeners
-  prevBtn.addEventListener('click', (e) => {
-    e.preventDefault();
+      const renderContext = {
+        canvasContext: ctx,
+        viewport: viewport
+      };
+      page.render(renderContext);
+      pageInfo.textContent = `Page ${currentPage} of ${pdfDoc.numPages}`;
+    });
+  };
+
+  const queueRenderPage = (num) => {
+    if (num >= 1 && num <= pdfDoc.numPages) {
+      currentPage = num;
+      renderPage(currentPage);
+    }
+  };
+
+  pdfjsLib.getDocument(url).promise.then((pdf) => {
+    pdfDoc = pdf;
+    pageInfo.textContent = `Page ${currentPage} of ${pdfDoc.numPages}`;
+    renderPage(currentPage);
+  });
+
+  document.getElementById('prevSlide').addEventListener('click', () => {
     if (currentPage > 1) {
-      updatePage(currentPage - 1);
+      queueRenderPage(currentPage - 1);
     }
   });
 
-  nextBtn.addEventListener('click', (e) => {
-    e.preventDefault();
-    if (currentPage < totalPages) {
-      updatePage(currentPage + 1);
+  document.getElementById('nextSlide').addEventListener('click', () => {
+    if (currentPage < pdfDoc.numPages) {
+      queueRenderPage(currentPage + 1);
     }
   });
 
-  // Keyboard navigation
+  document.getElementById('zoomIn').addEventListener('click', () => {
+    zoom += 0.2;
+    renderPage(currentPage);
+  });
+
+  document.getElementById('zoomOut').addEventListener('click', () => {
+    if (zoom > 0.4) {
+      zoom -= 0.2;
+      renderPage(currentPage);
+    }
+  });
+
   document.addEventListener('keydown', (e) => {
-    // Only handle keyboard events when not focused on input elements
-    if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
-    
-    switch(e.key) {
-      case 'ArrowLeft':
-      case 'ArrowUp':
-        e.preventDefault();
-        if (currentPage > 1) {
-          updatePage(currentPage - 1);
-        }
-        break;
-      case 'ArrowRight':
-      case 'ArrowDown':
-        e.preventDefault();
-        if (currentPage < totalPages) {
-          updatePage(currentPage + 1);
-        }
-        break;
+    if (e.key === 'ArrowLeft' && currentPage > 1) {
+      queueRenderPage(currentPage - 1);
+    } else if (e.key === 'ArrowRight' && currentPage < pdfDoc.numPages) {
+      queueRenderPage(currentPage + 1);
     }
   });
-
-  // Initialize
-  updatePage(1);
 });
 </script>
 
@@ -643,6 +615,16 @@ document.addEventListener('DOMContentLoaded', function() {
   border: none;
   transition: opacity 0.3s ease;
 }
+
+#pdfCanvas {
+  display: block;
+  margin: 0 auto;
+  max-width: 100%;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+}
+
 
 /* Responsive adjustments */
 @media (max-width: 768px) {
