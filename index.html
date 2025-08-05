@@ -856,7 +856,7 @@ class PDFViewer {
             // Or use smaller scale to fit completely (may leave empty space)
             // For NO empty space, we use the larger scale
             const baseScale = Math.max(scaleX, scaleY);
-            const finalScale = baseScale * this.zoom * 0.8;
+            const finalScale = baseScale * this.zoom * 0.7;
             
             // Get viewport with calculated scale
             const viewport = page.getViewport({ scale: finalScale });
