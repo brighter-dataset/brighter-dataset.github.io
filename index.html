@@ -249,31 +249,56 @@
             </div>
 
             <div class="column">
-                <div class="notification is-light glitter-container">
+                <div class="notification is-light confetti-container">
                     <p class="is-size-6 has-text-grey-dark mb-3">
-                        <i class="fas fa-award has-text-warning-dark mr-1 glitter-icon"></i>
+                        <i class="fas fa-award has-text-warning-dark mr-1 celebration-icon"></i>
                         <strong>This project has received two awards</strong>
                     </p>
                     <div class="tags is-centered">
-                        <span class="tag is-medium is-light glitter-tag">
-                            <i class="fas fa-trophy has-text-warning-dark mr-1 glitter-icon"></i>
+                        <span class="tag is-medium is-light award-tag">
+                            <i class="fas fa-trophy has-text-warning-dark mr-1 celebration-icon"></i>
                             ACL 2025 Best Resource Paper
                         </span>
-                        <span class="tag is-medium is-light glitter-tag">
-                            <i class="fas fa-trophy has-text-warning-dark mr-1 glitter-icon"></i>
+                        <span class="tag is-medium is-light award-tag">
+                            <i class="fas fa-trophy has-text-warning-dark mr-1 celebration-icon"></i>
                             SemEval 2025 Best Task Award
                         </span>
                     </div>
                     
-                    <!-- Glitter particles -->
-                    <div class="glitter-particle glitter-1"></div>
-                    <div class="glitter-particle glitter-2"></div>
-                    <div class="glitter-particle glitter-3"></div>
-                    <div class="glitter-particle glitter-4"></div>
-                    <div class="glitter-particle glitter-5"></div>
-                    <div class="glitter-particle glitter-6"></div>
-                    <div class="glitter-particle glitter-7"></div>
-                    <div class="glitter-particle glitter-8"></div>
+                    <div class="confetti-rain">
+                        <div class="confetti confetti-1 gold"></div>
+                        <div class="confetti confetti-2 gold"></div>
+                        <div class="confetti confetti-3 gold"></div>
+                        <div class="confetti confetti-4 gold"></div>
+                        <div class="confetti confetti-5 gold"></div>
+                        <div class="confetti confetti-6 gold"></div>
+                        <div class="confetti confetti-7 gold"></div>
+                        <div class="confetti confetti-8 gold"></div>
+                        <div class="confetti confetti-9 silver"></div>
+                        <div class="confetti confetti-10 silver"></div>
+                        <div class="confetti confetti-11 silver"></div>
+                        <div class="confetti confetti-12 silver"></div>
+                        <div class="confetti confetti-13 silver"></div>
+                        <div class="confetti confetti-14 silver"></div>
+                        <div class="confetti confetti-15 silver"></div>
+                        <div class="confetti confetti-16 silver"></div>
+                        <div class="confetti confetti-17 red"></div>
+                        <div class="confetti confetti-18 blue"></div>
+                        <div class="confetti confetti-19 green"></div>
+                        <div class="confetti confetti-20 purple"></div>
+                        <div class="confetti confetti-21 red"></div>
+                        <div class="confetti confetti-22 blue"></div>
+                        <div class="confetti confetti-23 green"></div>
+                        <div class="confetti confetti-24 purple"></div>
+                        <div class="confetti confetti-25 red"></div>
+                        <div class="confetti confetti-26 blue"></div>
+                        <div class="confetti confetti-27 green"></div>
+                        <div class="confetti confetti-28 purple"></div>
+                        <div class="confetti confetti-29 sparkle"></div>
+                        <div class="confetti confetti-30 sparkle"></div>
+                        <div class="confetti confetti-31 sparkle"></div>
+                        <div class="confetti confetti-32 sparkle"></div>
+                    </div>
                 </div>
             </div>
 
@@ -374,145 +399,208 @@
   </section>
 
   <style>
-.glitter-container {
+.confetti-container {
     position: relative;
     overflow: hidden;
     background: linear-gradient(135deg, #f8f9fa 0%, #fff 50%, #f8f9fa 100%);
     border: 1px solid #e9ecef;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    min-height: 120px;
 }
 
-.glitter-icon {
-    animation: sparkle 2s ease-in-out infinite;
+.celebration-icon {
+    animation: celebrate 2s ease-in-out infinite;
 }
 
-.glitter-tag {
+.award-tag {
     position: relative;
-    overflow: hidden;
     background: linear-gradient(45deg, #fff 30%, #fffbf0 50%, #fff 70%);
     border: 1px solid #f0d000;
     transition: all 0.3s ease;
-    animation: gentle-glow 3s ease-in-out infinite;
+    animation: victory-glow 3s ease-in-out infinite;
 }
 
-.glitter-tag:hover {
+.award-tag:hover {
     transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(240, 208, 0, 0.3);
+    box-shadow: 0 4px 12px rgba(240, 208, 0, 0.4);
 }
 
-.glitter-particle {
+.confetti-rain {
     position: absolute;
-    width: 4px;
-    height: 4px;
-    background: radial-gradient(circle, #ffd700 0%, #ffed4e 70%, transparent 100%);
-    border-radius: 50%;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
     pointer-events: none;
+    z-index: 10;
 }
 
-/* Individual glitter animations */
-.glitter-1 {
-    top: 20%;
-    left: 15%;
-    animation: twinkle 2.5s ease-in-out infinite;
+.confetti {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    opacity: 0;
+    animation: confetti-fall 5s linear infinite;
 }
 
-.glitter-2 {
-    top: 60%;
-    left: 80%;
-    animation: twinkle 3s ease-in-out infinite 0.5s;
+/* Confetti colors */
+.confetti.gold {
+    background: linear-gradient(45deg, #ffd700, #ffed4e);
+    box-shadow: 0 0 6px rgba(255, 215, 0, 0.8);
 }
 
-.glitter-3 {
-    top: 30%;
-    left: 70%;
-    animation: twinkle 2s ease-in-out infinite 1s;
+.confetti.silver {
+    background: linear-gradient(45deg, #c0c0c0, #e8e8e8);
+    box-shadow: 0 0 6px rgba(192, 192, 192, 0.8);
 }
 
-.glitter-4 {
-    top: 80%;
-    left: 25%;
-    animation: twinkle 2.8s ease-in-out infinite 1.5s;
+.confetti.red {
+    background: linear-gradient(45deg, #ff6b6b, #ff8e8e);
+    box-shadow: 0 0 6px rgba(255, 107, 107, 0.8);
 }
 
-.glitter-5 {
-    top: 45%;
-    left: 10%;
-    animation: twinkle 3.2s ease-in-out infinite 0.8s;
+.confetti.blue {
+    background: linear-gradient(45deg, #4ecdc4, #45b7aa);
+    box-shadow: 0 0 6px rgba(78, 205, 196, 0.8);
 }
 
-.glitter-6 {
-    top: 70%;
-    left: 60%;
-    animation: twinkle 2.3s ease-in-out infinite 2s;
+.confetti.green {
+    background: linear-gradient(45deg, #95e1d3, #6bcf7f);
+    box-shadow: 0 0 6px rgba(149, 225, 211, 0.8);
 }
 
-.glitter-7 {
-    top: 15%;
-    left: 50%;
-    animation: twinkle 2.7s ease-in-out infinite 0.3s;
+.confetti.purple {
+    background: linear-gradient(45deg, #a8e6cf, #c8a2c8);
+    box-shadow: 0 0 6px rgba(168, 230, 207, 0.8);
 }
 
-.glitter-8 {
-    top: 85%;
-    left: 85%;
-    animation: twinkle 3.1s ease-in-out infinite 1.2s;
+.confetti.sparkle {
+    background: radial-gradient(circle, #fff 30%, #ffd700 70%);
+    border-radius: 50%;
+    box-shadow: 0 0 10px rgba(255, 215, 0, 1);
 }
 
-@keyframes sparkle {
-    0%, 100% {
-        transform: scale(1);
-        filter: brightness(1) drop-shadow(0 0 2px #ffd700);
+/* Positioning for natural distribution */
+.confetti-1 { left: 3%; animation-delay: 0s; }
+.confetti-2 { left: 8%; animation-delay: 0.5s; }
+.confetti-3 { left: 13%; animation-delay: 1s; }
+.confetti-4 { left: 18%; animation-delay: 1.5s; }
+.confetti-5 { left: 23%; animation-delay: 2s; }
+.confetti-6 { left: 28%; animation-delay: 2.5s; }
+.confetti-7 { left: 33%; animation-delay: 3s; }
+.confetti-8 { left: 38%; animation-delay: 3.5s; }
+.confetti-9 { left: 43%; animation-delay: 4s; }
+.confetti-10 { left: 48%; animation-delay: 4.5s; }
+.confetti-11 { left: 53%; animation-delay: 0.2s; }
+.confetti-12 { left: 58%; animation-delay: 0.7s; }
+.confetti-13 { left: 63%; animation-delay: 1.2s; }
+.confetti-14 { left: 68%; animation-delay: 1.7s; }
+.confetti-15 { left: 73%; animation-delay: 2.2s; }
+.confetti-16 { left: 78%; animation-delay: 2.7s; }
+.confetti-17 { left: 83%; animation-delay: 3.2s; }
+.confetti-18 { left: 88%; animation-delay: 3.7s; }
+.confetti-19 { left: 93%; animation-delay: 4.2s; }
+.confetti-20 { left: 98%; animation-delay: 4.7s; }
+.confetti-21 { left: 5%; animation-delay: 0.3s; }
+.confetti-22 { left: 15%; animation-delay: 0.8s; }
+.confetti-23 { left: 25%; animation-delay: 1.3s; }
+.confetti-24 { left: 35%; animation-delay: 1.8s; }
+.confetti-25 { left: 45%; animation-delay: 2.3s; }
+.confetti-26 { left: 55%; animation-delay: 2.8s; }
+.confetti-27 { left: 65%; animation-delay: 3.3s; }
+.confetti-28 { left: 75%; animation-delay: 3.8s; }
+.confetti-29 { left: 85%; animation-delay: 4.3s; }
+.confetti-30 { left: 95%; animation-delay: 4.8s; }
+.confetti-31 { left: 10%; animation-delay: 0.1s; }
+.confetti-32 { left: 90%; animation-delay: 0.6s; }
+
+@keyframes confetti-fall {
+    0% {
+        top: -10px;
+        opacity: 0;
+        transform: translateX(0) translateY(0) rotateZ(0deg) rotateY(0deg);
     }
-    50% {
-        transform: scale(1.1);
+    10% {
+        opacity: 1;
+    }
+    20% {
+        transform: translateX(10px) translateY(20px) rotateZ(90deg) rotateY(180deg);
+    }
+    40% {
+        transform: translateX(-10px) translateY(40px) rotateZ(180deg) rotateY(360deg);
+    }
+    60% {
+        transform: translateX(15px) translateY(60px) rotateZ(270deg) rotateY(540deg);
+    }
+    80% {
+        transform: translateX(-5px) translateY(80px) rotateZ(360deg) rotateY(720deg);
+        opacity: 0.8;
+    }
+    100% {
+        top: 130%;
+        opacity: 0;
+        transform: translateX(0) translateY(100px) rotateZ(450deg) rotateY(900deg);
+    }
+}
+
+@keyframes celebrate {
+    0%, 100% {
+        transform: scale(1) rotate(0deg);
+        filter: brightness(1) drop-shadow(0 0 3px #ffd700);
+    }
+    25% {
+        transform: scale(1.1) rotate(-5deg);
         filter: brightness(1.3) drop-shadow(0 0 6px #ffd700);
     }
+    50% {
+        transform: scale(1.15) rotate(5deg);
+        filter: brightness(1.5) drop-shadow(0 0 9px #ffd700);
+    }
+    75% {
+        transform: scale(1.05) rotate(-3deg);
+        filter: brightness(1.2) drop-shadow(0 0 6px #ffd700);
+    }
 }
 
-@keyframes gentle-glow {
+@keyframes victory-glow {
     0%, 100% {
-        box-shadow: 0 0 5px rgba(240, 208, 0, 0.3);
+        box-shadow: 0 0 8px rgba(240, 208, 0, 0.3);
     }
     50% {
-        box-shadow: 0 0 15px rgba(240, 208, 0, 0.5);
+        box-shadow: 0 0 20px rgba(240, 208, 0, 0.6);
     }
 }
 
-@keyframes twinkle {
-    0%, 100% {
-        opacity: 0;
-        transform: scale(0);
-    }
-    50% {
-        opacity: 1;
-        transform: scale(1);
-    }
+/* Enhanced hover effects */
+.confetti-container:hover .confetti {
+    animation-duration: 3s;
+    width: 10px;
+    height: 10px;
 }
 
-/* Enhanced sparkle effect on hover */
-.glitter-container:hover .glitter-particle {
+.confetti-container:hover .celebration-icon {
     animation-duration: 1s;
+    filter: brightness(1.8) drop-shadow(0 0 12px #ffd700);
+    transform: scale(1.2);
 }
 
-.glitter-container:hover .glitter-icon {
-    animation-duration: 1s;
-    filter: brightness(1.4) drop-shadow(0 0 8px #ffd700);
-}
-
-.glitter-container:hover .glitter-tag {
-    box-shadow: 0 0 20px rgba(240, 208, 0, 0.6);
+.confetti-container:hover .award-tag {
+    box-shadow: 0 0 25px rgba(240, 208, 0, 0.8);
+    background: linear-gradient(45deg, #fff 20%, #fffbf0 40%, #ffff99 60%, #fffbf0 80%, #fff 100%);
 }
 
 /* Responsive adjustments */
 @media (max-width: 768px) {
-    .glitter-particle {
-        width: 3px;
-        height: 3px;
+    .confetti {
+        width: 6px;
+        height: 6px;
+    }
+    
+    .confetti-container:hover .confetti {
+        width: 8px;
+        height: 8px;
     }
 }
-</style>
-
-  <style>
 .awards-box {
     border: 1px solid #100586;
     border-radius: 8px;
