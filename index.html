@@ -520,7 +520,7 @@ document.addEventListener('DOMContentLoaded', function() {
     if (pageNum > totalPages && totalPages > 1) pageNum = totalPages;
     
     currentPage = pageNum;
-    pdfViewer.src = `static/slides.pdf#page=${currentPage}&view=FitH`;
+    pdfViewer.src = `static/pdfs/SemEval2025-task11-slides.pdf#page=${currentPage}&view=FitH`;
     pageInfo.textContent = `Page ${currentPage} of ${totalPages > 1 ? totalPages : '-'}`;
     
     // Update button states
