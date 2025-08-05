@@ -761,9 +761,9 @@
             <div class="column">
                 <h3 class="title is-3">Presentation Slides</h3>
                 
-                <!-- First PDF Viewer -->
-                <div class="pdf-viewer-container" data-pdf-url="static/pdfs/SemEval2025-task11-slides.pdf">
-                    <h4 class="subtitle is-5">SemEval Task Slides</h4>
+                
+                <div class="pdf-viewer-container" data-pdf-url="static/pdfs/ACL2025_BRIGHTER.pdf">
+                    <h4 class="subtitle is-5">BRIGHTER Paper</h4>
                     <div class="pdf-controls">
                         <button class="prev-slide button is-small">Previous</button>
                         <span class="page-info">Page 1 of ?</span>
@@ -778,10 +778,8 @@
                         <small>Use arrow keys (← →) or buttons above to navigate</small>
                     </div>
                 </div>
-
-                <!-- Second PDF Viewer -->
-                <div class="pdf-viewer-container" data-pdf-url="static/pdfs/ACL2025_BRIGHTER.pdf">
-                    <h4 class="subtitle is-5">BRIGHTER Paper</h4>
+                <div class="pdf-viewer-container" data-pdf-url="static/pdfs/SemEval2025-task11-slides.pdf">
+                    <h4 class="subtitle is-5">SemEval Task Slides</h4>
                     <div class="pdf-controls">
                         <button class="prev-slide button is-small">Previous</button>
                         <span class="page-info">Page 1 of ?</span>
@@ -858,7 +856,7 @@ class PDFViewer {
             // Or use smaller scale to fit completely (may leave empty space)
             // For NO empty space, we use the larger scale
             const baseScale = Math.max(scaleX, scaleY);
-            const finalScale = baseScale * this.zoom * 0.6;
+            const finalScale = baseScale * this.zoom * 0.8;
             
             // Get viewport with calculated scale
             const viewport = page.getViewport({ scale: finalScale });
