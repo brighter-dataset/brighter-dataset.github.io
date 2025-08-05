@@ -298,17 +298,27 @@
                 </a>
               </span>
 
-                <span class="link-block">
-                  <a href="https://github.com/emotion-analysis-project/SemEval2025-Task11/tree/main" target="_blank"
-                    class="external-link button is-normal is-rounded is-dark">
-                    <span class="icon">
-                      <i class="fab fa-github"></i>
-                    </span>
-                    <span>SemEval2025-Task-11 Repo</span>
-                  </a>
-                </span> 
+              <span class="link-block">
+                <a href="https://github.com/emotion-analysis-project/SemEval2025-Task11/tree/main" target="_blank"
+                  class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                    <i class="fab fa-github"></i>
+                  </span>
+                  <span>SemEval2025-Task-11 Repo</span>
+                </a>
+              </span>
 
-               <div style="margin-top: 20px;"></div>
+              <span class="link-block">
+                <a href="static/pdfs/SemEval2025-task11-slides.pdf" target="_blank"
+                  class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                    <i class="fab fa-eye"></i>
+                  </span>
+                  <span>SemEval2025-Task-11 Slides</span>
+                </a>
+              </span>
+
+              <div style="margin-top: 20px;"></div>
 
 <p style="font-size: 1.2em; font-weight: bold; color: #d32f2f; text-align: center;">
   If you use our dataset, please cite our papers using the BibTeX at the end of this page.
@@ -441,24 +451,12 @@
     </div>
   </section>
 
-<section class="hero is-small is-light">
-  <div class="hero-body">
-    <div class="container">
-      <h2 class="title is-3">Presentation Slides</h2>
-      <div class="columns is-centered">
+  <section class="section hero">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
         <div class="column is-four-fifths">
-          
-          <div class="has-text-centered" style="margin-bottom: 20px;">
-            <a href="static/pdfs/SemEval2025-task11-slides.pdf" download class="button is-primary is-medium">
-              <span class="icon">
-                <i class="fas fa-download"></i>
-              </span>
-              <span>Download Slides (PDF)</span>
-            </a>
-          </div>
-
-          <div class="pdf-viewer-container" style="position: relative; background: #f5f5f5; border-radius: 8px; padding: 20px;">
-            
+          <h3 class="title is-3">Brighter SemEval Task 11 Slides</h3>
+          <div class="pdf-viewer-container" style="position: relative; background: #f5f5f5; border-radius: 0; padding: 20px; width: 100%; margin: 0;">
             <div class="pdf-controls" style="display: flex; justify-content: center; align-items: center; margin-bottom: 15px; gap: 15px;">
               <button id="prevSlide" class="button is-small">
                 <span class="icon">
@@ -479,7 +477,7 @@
               </button>
             </div>
 
-            <div style="width: 100%; height: 600px; border: 1px solid #ddd; border-radius: 4px; overflow: hidden;">
+            <div style="width: 100%; height: 70vh; border: 1px solid #ddd; border-radius: 4px; overflow: hidden;">
               <iframe 
                 id="pdfViewer" 
                 src="static/pdfs/SemEval2025-task11-slides.pdf#page=1&view=FitH" 
@@ -501,8 +499,7 @@
         </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
@@ -530,7 +527,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
   // Try to get total pages (this is a fallback - you might want to set this manually)
   // You can replace this number with the actual number of pages in your PDF
-  totalPages = 20; // Set this to your actual number of slides
+  totalPages = 14; // Set this to your actual number of slides
   updatePage(1);
 
   // Button event listeners
@@ -567,8 +564,18 @@ document.addEventListener('DOMContentLoaded', function() {
 </script>
 
 <style>
+/* Reset any container max-widths */
+.container-fluid {
+  width: 100% !important;
+  max-width: none !important;
+  padding: 0 !important;
+}
+
 .pdf-viewer-container {
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  width: 100vw !important;
+  margin-left: calc(-50vw + 50%) !important;
+  max-width: none !important;
 }
 
 .pdf-controls button:disabled {
@@ -580,10 +587,32 @@ document.addEventListener('DOMContentLoaded', function() {
   transition: opacity 0.3s ease;
 }
 
-/* Responsive adjustments */
+/* Force full width on all screen sizes */
+@media (max-width: 1408px) {
+  .container-fluid {
+    max-width: none !important;
+  }
+}
+
+@media (max-width: 1216px) {
+  .container-fluid {
+    max-width: none !important;
+  }
+}
+
+@media (max-width: 1024px) {
+  .container-fluid {
+    max-width: none !important;
+  }
+}
+
 @media (max-width: 768px) {
-  .pdf-viewer-container iframe {
-    height: 400px;
+  .pdf-viewer-container {
+    height: auto;
+  }
+  
+  .pdf-viewer-container > div:last-of-type {
+    height: 50vh !important;
   }
   
   .pdf-controls {
@@ -593,6 +622,16 @@ document.addEventListener('DOMContentLoaded', function() {
   
   .pdf-controls span {
     font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .pdf-viewer-container {
+    padding: 10px;
+  }
+  
+  .pdf-viewer-container > div:last-of-type {
+    height: 40vh !important;
   }
 }
 </style>
