@@ -806,7 +806,7 @@ class PDFViewer {
         this.url = container.dataset.pdfUrl;
         this.pdfDoc = null;
         this.currentPage = 1;
-        this.zoom = 1.0;
+        this.zoom = parseFloat(container.dataset.initialZoom) || 1.0;
         
         // Get elements within this container
         this.canvas = container.querySelector('.pdf-canvas');
